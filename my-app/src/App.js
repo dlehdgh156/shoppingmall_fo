@@ -4,14 +4,15 @@ import { useEffect } from 'react';
 
 function App() {
 
-  return (
-    <div>
-     <button onClick={handleCountUpdate}>update</button>
-     <span>{count}</span>
-     <input type="text" value={name} onChange={handleName}></input>
-     <span>{name}</span>
-    </div>
-  )
+  const [msg,SetMsg] = useState("");
+
+  useEffect(() => {
+    fetch("http://localhost:8080/api/hello")
+      .then((res) => res.text())
+      .then((text) => setMsg(text));
+  }, []);
+
+  return <div>{msg}</div>;
   
 }
 
